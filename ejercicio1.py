@@ -14,9 +14,11 @@ import matplotlib.pyplot as plt
 
 acumulador = 0
 probabilidades = []
+random.seed(2022)  # Para que los resultados sean reproducibles
 for i in range(1000):
 
     #Se genera un aleatorio simulando la moneda y se agrega a lo anterior
+
     acumulador += random.randint(0,1)
 
     #Se calcula la probabilidad tomando en cuenta la iteracion y
