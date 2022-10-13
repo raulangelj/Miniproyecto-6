@@ -4,6 +4,8 @@ Bryann Alfaro
 Donaldo Garcia
 """
 import random
+import matplotlib.pyplot as plt
+import matplotlib
 
 
 def evaluate_token(token, isEven):
@@ -21,20 +23,45 @@ def evaluate_token(token, isEven):
     else:
       return False
 
-funds = 100
-wager = 5
-total_games = 1000
+def game(funds, wager, games, iterations):
+    """
+    Funcion que simula el juego
+    """
+    game = 1
 
-for _ in range(total_games):
-    token = random.randint(1, 100)
-    isEven = random.choice([True, False])
+    x_wager = []
+    y_funds = []
 
-    if evaluate_token(token, isEven):
-        funds += wager
-    else:
-        funds -= wager
+    while game <= games:
+        for _ in range(iterations):
+            token = random.randint(1, 100)
+            isEven = random.choice([True, False])
 
-print(f"Funds: {funds}")
+            if evaluate_token(token, isEven):
+                funds += wager
+            else:
+                funds -= wager
+            y_funds.append(funds)
+            x_wager.append(game)
+        game += 1
+    print(f"Funds: {funds}")
+    plt.plot(x_wager, y_funds)
+    plt.ylabel('Dinero Total')
+    plt.xlabel('Numero de apuestas')
+    plt.show()
+
 
 # task 1: la probabilidad de que gane la casa es de 52%
 
+# task 3:
+funds = 1000
+wager = 10
+# a.50 juegos, con 10 iteraciones
+game(funds, wager, 50, 10)
+print('========= FINISH GAME 1 ==========')
+# b.50 juegos, con 1,000 iteraciones
+game(funds, wager, 50, 1000)
+print('========= FINISH GAME 2 ==========')
+# c.10,000 juegos, con 10 iteraciones
+game(funds, wager, 10000, 10)
+print('========= FINISH GAME 3 ==========')
